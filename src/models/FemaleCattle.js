@@ -1,35 +1,65 @@
 import { Cattle } from './Cattle';
 
 export class FemaleCattle extends Cattle {
-  constructor(id, tag, breed, location, status, isPregnant, dueDate, imageUrl = null) {
-    super(id, tag, breed, location, status, imageUrl);
-    this.sex = 'Female';
-    this.isPregnant = isPregnant;
-    this.dueDate = dueDate;
+  #isPregnant;
+  #dueDate;
+  #pregnancyStatus;
+
+  constructor(id, tag, breed, location, status = 'Healthy', isPregnant = false, dueDate = null, imageUrl = null) {
+    super(id, 'Female', tag, breed, location, status, imageUrl);
+    this.#isPregnant = isPregnant;
+    this.#dueDate = dueDate;
+    this.#pregnancyStatus = this.#calculatePregnancyStatus();
   }
 
-  static createFromFormData(formData) {
-    const isPregnant = formData.get('isPregnant') === 'true';
-    const dueDate = isPregnant ? formData.get('dueDate') : null;
-    const imageUrl = formData.get('image') ? URL.createObjectURL(formData.get('image')) : null;
+  // Getters
+  get isPregnant() { return this.#isPregnant; }
+  get dueDate() { return this.#dueDate; }
+  get pregnancyStatus() { return this.#pregnancyStatus; }
 
-    return new FemaleCattle(
-      null, // ID will be set by controller
-      formData.get('tag'),
-      formData.get('breed'),
-      formData.get('location'),
-      formData.get('status') || 'Healthy', // Default to 'Healthy' if not provided
-      isPregnant,
-      dueDate,
-      imageUrl
-    );
+  // Setters with validation
+  set isPregnant(newValue) {
+    this.#isPregnant = newValue;
+    this.#pregnancyStatus = this.#calculatePregnancyStatus();
+  }
+
+  set dueDate(newDate) {
+    if (newDate && !(newDate instanceof Date)) {
+      throw new Error('Due date must be a Date object');
+    }
+    this.#dueDate = newDate;
+    this.#pregnancyStatus = this.#calculatePregnancyStatus();
   }
 
   getPregnancyStatusClass() {
-    return this.isPregnant ? 'pregnant' : 'not-pregnant';
+    return this.#pregnancyStatus.toLowerCase().replace(/\s+/g, '-');
   }
 
   formatDueDate() {
-    return this.dueDate ? new Date(this.dueDate).toLocaleDateString() : 'N/A';
+    if (!this.#isPregnant || !this.#dueDate) {
+      return 'N/A';
+    }
+    return this.#dueDate.toLocaleDateString();
+  }
+
+  #calculatePregnancyStatus() {
+    if (!this.#isPregnant) return 'Not Pregnant';
+    if (!this.#dueDate) return 'Pregnant';
+    
+    const today = new Date();
+    const daysUntilDue = Math.ceil((this.#dueDate - today) / (1000 * 60 * 60 * 24));
+    
+    if (daysUntilDue <= 0) return 'Overdue';
+    if (daysUntilDue <= 30) return 'Due Soon';
+    return 'Pregnant';
+  }
+
+  toJSON() {
+    return {
+      ...super.toJSON(),
+      isPregnant: this.#isPregnant,
+      dueDate: this.#dueDate,
+      pregnancyStatus: this.#pregnancyStatus
+    };
   }
 } 

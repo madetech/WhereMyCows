@@ -8,7 +8,17 @@ export function AddCattleForm({ onSubmit, onCancel, breeds, locations }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    onSubmit(formData);
+    const formObject = {
+      sex: formData.get('sex'),
+      tag: formData.get('tag'),
+      breed: formData.get('breed'),
+      location: formData.get('location'),
+      status: formData.get('status'),
+      isPregnant: formData.get('isPregnant'),
+      dueDate: formData.get('dueDate'),
+      imageUrl: imagePreview
+    };
+    onSubmit(formObject);
   };
 
   const handleImageChange = (e) => {

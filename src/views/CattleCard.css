@@ -1,0 +1,83 @@
+.cattle-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cattle-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.cattle-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.cattle-card h3 {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.cattle-card p {
+  margin: 0.25rem 0;
+  color: #666;
+}
+
+.status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.status.healthy {
+  background-color: #e6ffe6;
+  color: #006600;
+}
+
+.status.vet-check-needed {
+  background-color: #fff3e6;
+  color: #cc6600;
+}
+
+.pregnancy-status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.pregnancy-status.pregnant {
+  background-color: #e6ffe6;
+  color: #006600;
+}
+
+.pregnancy-status.not-pregnant {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.due-date {
+  display: block;
+  font-size: 0.9em;
+  margin-top: 0.25rem;
+} 

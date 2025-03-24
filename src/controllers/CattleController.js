@@ -11,7 +11,6 @@ export class CattleController {
 
   addCattle(formData) {
     const newCattle = CattleFactory.createFromFormData(formData);
-    newCattle.id = this.cattle.length + 1;
     this.cattle.push(newCattle);
     return newCattle;
   }

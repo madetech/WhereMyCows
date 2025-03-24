@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './CattleCard.css';
 
 export function CattleCard({ cattle }) {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div className="cattle-card">
       <div className="cattle-image">
-        {cattle.imageUrl ? (
-          <img src={cattle.imageUrl} alt={`${cattle.breed} ${cattle.sex}`} />
+        {cattle.hasImage() && !imageError ? (
+          <img 
+            src={cattle.imageUrl} 
+            alt={`${cattle.breed} ${cattle.sex}`}
+            onError={() => setImageError(true)}
+          />
         ) : (
           <div className="placeholder-image">
             <span>No Image</span>

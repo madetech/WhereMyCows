@@ -1,21 +1,28 @@
 import { Cattle } from './Cattle';
 
 export class MaleCattle extends Cattle {
-  constructor(id, tag, breed, location, status, imageUrl = null) {
-    super(id, tag, breed, location, status, imageUrl);
-    this.sex = 'Male';
+  #semenQuality;
+
+  constructor(id, tag, breed, location, status = 'Healthy', semenQuality = 'Good', imageUrl = null) {
+    super(id, 'Male', tag, breed, location, status, imageUrl);
+    this.#semenQuality = semenQuality;
   }
 
-  static createFromFormData(formData) {
-    const imageUrl = formData.get('image') ? URL.createObjectURL(formData.get('image')) : null;
+  // Getter
+  get semenQuality() { return this.#semenQuality; }
 
-    return new MaleCattle(
-      null, // ID will be set by the controller
-      formData.get('tag'),
-      formData.get('breed'),
-      formData.get('location'),
-      formData.get('status') || 'Healthy',
-      imageUrl
-    );
+  // Setter with validation
+  set semenQuality(newQuality) {
+    if (!newQuality) {
+      throw new Error('Semen quality cannot be empty');
+    }
+    this.#semenQuality = newQuality;
+  }
+
+  toJSON() {
+    return {
+      ...super.toJSON(),
+      semenQuality: this.#semenQuality
+    };
   }
 } 
