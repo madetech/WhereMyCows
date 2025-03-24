@@ -1,152 +1,100 @@
 # Where My Cows
 
-A React application for tracking and managing cattle. This application helps farmers and ranchers keep track of their cattle's location, health status, and other important information.
+A React application for tracking cattle on your farm. Built with modern web technologies and following the MVC (Model-View-Controller) architectural pattern.
 
 ## Features
 
-- Track cattle location across different pastures
-- Monitor health status of individual cattle
+- Track cattle locations across different pastures
+- Monitor health status and breeding information
 - Add new cattle with detailed information
-- Responsive design for use on desktop and mobile devices
-- Dark theme for better visibility in outdoor conditions
-- Comprehensive test coverage for all models and components
-
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-- Node.js (version 16 or higher)
-- npm (comes with Node.js)
-
-## Getting Started
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd wheremycows
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-## Available Scripts
-
-### Development
-To start the development server:
-```bash
-npm run dev
-```
-The application will be available at [http://localhost:3000](http://localhost:3000)
-
-### Building for Production
-To create a production build:
-```bash
-npm run build
-```
-This will create an optimized production build in the `dist` directory.
-
-To preview the production build locally:
-```bash
-npm run preview
-```
-
-### Testing
-The project uses Jest and React Testing Library for testing. The following commands are available:
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode (tests will re-run when files change)
-npm run test:watch
-
-# Run tests with coverage report
-npm run test:coverage
-```
-
-The test coverage requirements are:
-- 80% branch coverage
-- 80% function coverage
-- 80% line coverage
-- 80% statement coverage
-
-### Linting
-To run the linter:
-```bash
-npm run lint
-```
+- Visual farm map with interactive pasture selection
+- Filter cattle by location
+- Responsive design for all devices
 
 ## Project Structure
 
+The application follows the MVC (Model-View-Controller) architectural pattern:
+
 ```
-wheremycows/
-├── src/
-│   ├── components/     # React components
-│   │   ├── CattleList.jsx    # Main cattle management component
-│   │   └── CattleList.css    # Styles for cattle list
-│   ├── models/        # Data models
-│   │   ├── Cattle.js         # Base cattle model
-│   │   ├── MaleCattle.js     # Male cattle model
-│   │   ├── FemaleCattle.js   # Female cattle model
-│   │   └── CattleFactory.js  # Factory for creating cattle instances
-│   ├── __tests__/     # Test files
-│   │   ├── Cattle.test.js    # Tests for cattle models
-│   │   └── CattleFactory.test.js  # Tests for cattle factory
-│   ├── App.jsx        # Main application component
-│   ├── App.css        # Styles for App component
-│   ├── main.jsx       # Application entry point
-│   └── index.css      # Global styles
-├── public/            # Static assets
-├── index.html         # HTML template
-├── package.json       # Project dependencies and scripts
-├── vite.config.js     # Vite configuration
-├── jest.config.js     # Jest configuration
-├── babel.config.js    # Babel configuration
-└── README.md          # This file
+src/
+├── models/           # Data models and business logic
+│   ├── Cattle.js        # Base cattle model with shared properties
+│   ├── MaleCattle.js    # Male-specific cattle model
+│   ├── FemaleCattle.js  # Female-specific cattle model
+│   └── CattleFactory.js # Factory for creating cattle instances
+├── controllers/      # Application logic and state management
+│   └── CattleController.js  # Manages cattle data and operations
+└── views/           # UI components and presentation
+    ├── AddCattleForm.jsx    # Form for adding new cattle
+    ├── CattleCard.jsx       # Card component for displaying cattle info
+    ├── CattleList.jsx       # List view of all cattle
+    ├── FarmMap.jsx          # Interactive farm map
+    └── MyCattle.jsx         # Main cattle management view
 ```
 
-## Technologies Used
+### MVC Architecture
 
-- React 18
-- Vite
-- React Router
-- CSS3
-- Modern JavaScript (ES6+)
-- Jest
-- React Testing Library
+1. **Models** (`src/models/`)
+   - Handle data structure and business logic
+   - Define properties and methods for cattle data
+   - Implement inheritance for different cattle types (Male/Female)
+   - Provide data validation and formatting
 
-## Development Guidelines
+2. **Controllers** (`src/controllers/`)
+   - Manage application state
+   - Handle data operations (CRUD)
+   - Coordinate between models and views
+   - Provide data access methods to views
 
-### Adding New Features
-1. Create new components in the `src/components` directory
-2. Add corresponding CSS files for styling
-3. Update the router in `App.jsx` if adding new routes
-4. Follow the existing styling patterns for consistency
-5. Write tests for new features in the `__tests__` directory
+3. **Views** (`src/views/`)
+   - Handle UI rendering and user interaction
+   - Receive data from controllers
+   - Update UI based on user actions
+   - Send user input back to controllers
 
-### Code Style
-- Use functional components with hooks
-- Follow the established naming conventions
-- Keep components focused and single-responsibility
-- Use CSS modules or component-specific CSS files
-- Write tests for all new features and bug fixes
+### Example Flow
 
-### Testing Guidelines
-- Write unit tests for all models and utilities
-- Write integration tests for components
-- Maintain test coverage above 80%
-- Use meaningful test descriptions
-- Follow the Arrange-Act-Assert pattern in tests
+1. User clicks "Add New Cattle"
+2. View (`AddCattleForm`) collects user input
+3. Controller (`CattleController`) processes the form data
+4. Model (`CattleFactory`) creates a new cattle instance
+5. Controller updates the application state
+6. View (`CattleList`) re-renders with the new data
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:5173](http://localhost:5173) in your browser
+
+## Development
+
+- Built with React and Vite
+- Uses CSS modules for styling
+- Follows modern JavaScript practices
+- Implements responsive design principles
+
+## Testing
+
+Run tests with:
+```bash
+npm test
+```
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Write tests for your changes
-4. Commit your changes (`git commit -m 'Add some amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
 ## License
 

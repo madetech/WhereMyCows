@@ -1,5 +1,5 @@
 import { Routes, Route, Link } from 'react-router-dom'
-import CattleList from './components/CattleList'
+import MyCattle from './views/MyCattle'
 import './App.css'
 
 function Home() {
@@ -34,7 +34,7 @@ function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/cattle">Cattle</Link>
+            <Link to="/cattle">My Cattle</Link>
           </li>
         </ul>
       </nav>
@@ -42,7 +42,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cattle" element={<CattleList />} />
+          <Route path="/cattle" element={<MyCattle />} />
         </Routes>
       </main>
     </div>
