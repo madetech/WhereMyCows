@@ -13,11 +13,11 @@ const FarmMap = ({ locations, currentLocation, onLocationChange, cattle }) => {
   const renderCowNametags = (location) => {
     const cows = getCowsInLocation(location);
     return cows.map((cow, index) => (
-      <div 
+      <div
         key={cow.id}
         className="cow-nametag"
         style={{
-          top: `${(index * 20) + 20}%`,
+          top: `${20 + (index * 15)}%`,
           left: '50%',
           transform: 'translateX(-50%)',
         }}
@@ -29,84 +29,151 @@ const FarmMap = ({ locations, currentLocation, onLocationChange, cattle }) => {
 
   return (
     <div className="farm-map">
-      <h2>Farm Layout</h2>
-      <div className="map-container">
-        <div className="farm-boundary">
-          <div 
-            className="pasture north-pasture"
-            onClick={() => handlePastureClick('North Pasture')}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('North Pasture')}
-          >
-            <h3>North Pasture</h3>
-            {renderCowNametags('North Pasture')}
-            <div className={`location-indicator ${currentLocation === 'North Pasture' ? 'active' : ''}`}>
-              {currentLocation === 'North Pasture' && 'Selected'}
-            </div>
-          </div>
-          <div 
-            className="pasture east-pasture"
-            onClick={() => handlePastureClick('East Pasture')}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('East Pasture')}
-          >
-            <h3>East Pasture</h3>
-            {renderCowNametags('East Pasture')}
-            <div className={`location-indicator ${currentLocation === 'East Pasture' ? 'active' : ''}`}>
-              {currentLocation === 'East Pasture' && 'Selected'}
-            </div>
-          </div>
-          <div 
-            className="pasture south-pasture"
-            onClick={() => handlePastureClick('South Pasture')}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('South Pasture')}
-          >
-            <h3>South Pasture</h3>
-            {renderCowNametags('South Pasture')}
-            <div className={`location-indicator ${currentLocation === 'South Pasture' ? 'active' : ''}`}>
-              {currentLocation === 'South Pasture' && 'Selected'}
-            </div>
-          </div>
-          <div 
-            className="pasture west-pasture"
-            onClick={() => handlePastureClick('West Pasture')}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('West Pasture')}
-          >
-            <h3>West Pasture</h3>
-            {renderCowNametags('West Pasture')}
-            <div className={`location-indicator ${currentLocation === 'West Pasture' ? 'active' : ''}`}>
-              {currentLocation === 'West Pasture' && 'Selected'}
-            </div>
-          </div>
-          <div 
-            className="farm-center"
-            onClick={() => handlePastureClick('Farm Center')}
-            role="button"
-            tabIndex={0}
-            onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('Farm Center')}
-          >
-            <h3>Farm Center</h3>
-            {renderCowNametags('Farm Center')}
-            <div className={`location-indicator ${currentLocation === 'Farm Center' ? 'active' : ''}`}>
-              {currentLocation === 'Farm Center' && 'Selected'}
-            </div>
-          </div>
+      <div className="farm-boundary">
+        {/* Farm Center */}
+        <div
+          className="farm-center"
+          style={{
+            top: '40%',
+            left: '40%',
+            width: '20%',
+            height: '20%',
+          }}
+          onClick={() => handlePastureClick('Farm Center')}
+          onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('Farm Center')}
+          role="button"
+          tabIndex={0}
+        >
+          Farm Center
+          {renderCowNametags('Farm Center')}
         </div>
+
+        {/* North Pasture */}
+        <div
+          className="pasture"
+          style={{
+            top: '5%',
+            left: '30%',
+            width: '40%',
+            height: '30%',
+          }}
+          onClick={() => handlePastureClick('North Pasture')}
+          onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('North Pasture')}
+          role="button"
+          tabIndex={0}
+        >
+          North Pasture
+          {renderCowNametags('North Pasture')}
+        </div>
+
+        {/* South Pasture */}
+        <div
+          className="pasture"
+          style={{
+            top: '65%',
+            left: '30%',
+            width: '40%',
+            height: '30%',
+          }}
+          onClick={() => handlePastureClick('South Pasture')}
+          onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('South Pasture')}
+          role="button"
+          tabIndex={0}
+        >
+          South Pasture
+          {renderCowNametags('South Pasture')}
+        </div>
+
+        {/* East Field */}
+        <div
+          className="pasture"
+          style={{
+            top: '35%',
+            left: '70%',
+            width: '25%',
+            height: '30%',
+          }}
+          onClick={() => handlePastureClick('East Field')}
+          onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('East Field')}
+          role="button"
+          tabIndex={0}
+        >
+          East Field
+          {renderCowNametags('East Field')}
+        </div>
+
+        {/* West Field */}
+        <div
+          className="pasture"
+          style={{
+            top: '35%',
+            left: '5%',
+            width: '25%',
+            height: '30%',
+          }}
+          onClick={() => handlePastureClick('West Field')}
+          onKeyPress={(e) => e.key === 'Enter' && handlePastureClick('West Field')}
+          role="button"
+          tabIndex={0}
+        >
+          West Field
+          {renderCowNametags('West Field')}
+        </div>
+
+        {/* Decorative Elements */}
+        <div className="tree" style={{ top: '10%', left: '10%' }} />
+        <div className="tree" style={{ top: '80%', left: '80%' }} />
+        <div className="water" style={{ top: '20%', left: '80%' }} />
+        <div className="water" style={{ top: '70%', left: '20%' }} />
+        
+        {/* Paths */}
+        <div 
+          className="path" 
+          style={{ 
+            top: '35%', 
+            left: '30%', 
+            width: '40%', 
+            height: '2%' 
+          }} 
+        />
+        <div 
+          className="path" 
+          style={{ 
+            top: '50%', 
+            left: '30%', 
+            width: '2%', 
+            height: '40%' 
+          }} 
+        />
       </div>
+
       <div className="map-legend">
-        <div className="legend-item">
-          <div className="legend-color active"></div>
-          <span>Selected Location</span>
+        <div className="legend-section">
+          <div className="legend-title">Locations</div>
+          <div className="legend-item">
+            <div className="legend-icon pasture-icon" />
+            <span className="legend-text">Pasture</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-icon farm-center-icon" />
+            <span className="legend-text">Farm Center</span>
+          </div>
         </div>
-        <div className="legend-item">
-          <div className="legend-color pasture"></div>
-          <span>Pasture</span>
+
+        <div className="legend-section">
+          <div className="legend-title">Features</div>
+          <div className="legend-item">
+            <div className="legend-icon tree" />
+            <span className="legend-text">Trees</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-icon water" />
+            <span className="legend-text">Water Source</span>
+          </div>
+          <div className="legend-item">
+            <div className="legend-icon path" />
+            <span className="legend-text">Path</span>
+          </div>
         </div>
       </div>
     </div>
