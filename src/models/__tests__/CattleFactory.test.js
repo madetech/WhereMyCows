@@ -7,8 +7,7 @@ describe('CattleFactory', () => {
       tag: 'COW001',
       breed: 'Angus',
       location: 'North Pasture',
-      status: 'Healthy',
-      semenQuality: 'Good'
+      status: 'Healthy'
     };
     
     const cattle = CattleFactory.createFromFormData(formData);
@@ -18,7 +17,6 @@ describe('CattleFactory', () => {
     expect(cattle.breed).toBe('Angus');
     expect(cattle.location).toBe('North Pasture');
     expect(cattle.status).toBe('Healthy');
-    expect(cattle.semenQuality).toBe('Good');
   });
 
   test('creates female cattle from form data', () => {
@@ -59,7 +57,6 @@ describe('CattleFactory', () => {
     expect(cattle[0].breed).toBe('Angus');
     expect(cattle[0].location).toBe('North Pasture');
     expect(cattle[0].status).toBe('Healthy');
-    expect(cattle[0].semenQuality).toBe('Good');
     
     // Check first female cattle
     expect(cattle[5].tag).toBe('F001');
