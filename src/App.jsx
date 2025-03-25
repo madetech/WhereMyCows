@@ -1,5 +1,7 @@
+import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom'
 import MyCattle from './views/MyCattle'
+import { Header } from './views/components/Header';
 import './App.css'
 
 function Home() {
@@ -28,18 +30,8 @@ function Home() {
 function App() {
   return (
     <div className="app">
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/cattle">My Cattle</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <main>
+      <Header />
+      <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cattle" element={<MyCattle />} />
