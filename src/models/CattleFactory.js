@@ -7,26 +7,37 @@ export class CattleFactory {
     // Generate a new ID based on the current timestamp
     const newId = Date.now();
     
-    return sex === 'Male' 
-      ? new MaleCattle(
-          newId,
-          formData.tag,
-          formData.breed,
-          formData.location,
-          formData.status,
-          formData.semenQuality,
-          formData.imageUrl || null
-        )
-      : new FemaleCattle(
-          newId,
-          formData.tag,
-          formData.breed,
-          formData.location,
-          formData.status,
-          formData.isPregnant === 'true',
-          formData.dueDate ? new Date(formData.dueDate) : null,
-          formData.imageUrl || null
-        );
+    if (!formData.tag || !formData.breed || !formData.location) {
+      throw new Error('Required fields are missing');
+    }
+
+    if (sex === 'Male') {
+      return new MaleCattle(
+        newId,
+        formData.tag,
+        formData.breed,
+        formData.location,
+        formData.status || 'Healthy',
+        formData.semenQuality || 'Good',
+        formData.imageUrl || null
+      );
+    } else if (sex === 'Female') {
+      const isPregnant = formData.isPregnant === 'true';
+      const dueDate = isPregnant && formData.dueDate ? new Date(formData.dueDate) : null;
+
+      return new FemaleCattle(
+        newId,
+        formData.tag,
+        formData.breed,
+        formData.location,
+        formData.status || 'Healthy',
+        isPregnant,
+        dueDate,
+        formData.imageUrl || null
+      );
+    } else {
+      throw new Error('Invalid sex value');
+    }
   }
 
   static getInitialData() {
