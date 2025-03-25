@@ -15,6 +15,13 @@ function CattleList({ cattle = [], controller, onCattleUpdate }) {
     setShowAddForm(false)
   }
 
+  const handleEditCattle = (updatedCattle) => {
+    const updatedCattleList = cattle.map(cow => 
+      cow.id === updatedCattle.id ? updatedCattle : cow
+    )
+    onCattleUpdate(updatedCattleList)
+  }
+
   const handleLocationChange = (location) => {
     setCurrentLocation(location)
   }
@@ -55,7 +62,11 @@ function CattleList({ cattle = [], controller, onCattleUpdate }) {
 
       <div className="cattle-grid">
         {(filteredCattle || []).map((cow) => (
-          <CattleCard key={cow.id} cattle={cow} />
+          <CattleCard 
+            key={cow.id} 
+            cattle={cow} 
+            onEdit={handleEditCattle}
+          />
         ))}
       </div>
     </div>
