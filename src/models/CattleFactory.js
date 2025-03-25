@@ -18,7 +18,6 @@ export class CattleFactory {
         formData.breed,
         formData.location,
         formData.status || 'Healthy',
-        formData.semenQuality || 'Good',
         formData.imageUrl || null
       );
     } else if (sex === 'Female') {
