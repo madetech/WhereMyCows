@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { EditStatusForm } from './EditStatusForm';
 import './CattleCard.css';
 
-export function CattleCard({ cattle }) {
+export function CattleCard({ cattle, onStatusUpdate }) {
   const [imageError, setImageError] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  const handleStatusUpdate = (updates) => {
+    onStatusUpdate(cattle.id, updates);
+    setShowEditForm(false);
+  };
 
   return (
     <div className="cattle-card">
@@ -33,9 +40,24 @@ export function CattleCard({ cattle }) {
           )}
         </p>
       )}
-      <p className={`status ${cattle.getStatusClass()}`}>
-        Status: {cattle.status}
-      </p>
+      <div className="status-section">
+        <p className={`status ${cattle.getStatusClass()}`}>
+          Status: {cattle.status}
+        </p>
+        <button 
+          className="edit-status-button"
+          onClick={() => setShowEditForm(true)}
+        >
+          Edit Status
+        </button>
+      </div>
+      {showEditForm && (
+        <EditStatusForm
+          cattle={cattle}
+          onSubmit={handleStatusUpdate}
+          onCancel={() => setShowEditForm(false)}
+        />
+      )}
     </div>
   );
 } 
