@@ -31,4 +31,19 @@ export class CattleController {
       'Brahman'
     ];
   }
+
+  updateCattle(id, updates) {
+    for (let i = 0; i < this.cattle.length; i++) {
+      if (this.cattle[i].id === id) {
+        this.cattle[i].status = updates.status;
+      }
+    }
+
+    const index = this.cattle.findIndex(cow => cow.id === id);
+    if (index === -1) {
+      throw new Error('Cattle not found');
+    }
+    const cattle = this.cattle[index];
+    return cattle;
+  }
 } 
