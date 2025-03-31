@@ -6,8 +6,10 @@ export class Cattle {
   #location;
   #status;
   #imageUrl;
+  fieldX;
+  fieldY;
 
-  constructor(id, sex, tag, breed, location, status = 'Healthy', imageUrl = null) {
+  constructor(id, sex, tag, breed, location, status = 'Healthy', imageUrl = null, fieldX = 0.0, fieldY = 0.0) {
     this.#id = id;
     this.#sex = sex;
     this.#tag = tag;
@@ -15,6 +17,8 @@ export class Cattle {
     this.#location = location;
     this.#status = status;
     this.#imageUrl = imageUrl;
+    this.fieldX = fieldX;
+    this.fieldY = fieldY;
   }
 
   // Getters
@@ -51,6 +55,23 @@ export class Cattle {
 
   getStatusClass() {
     return this.#status.toLowerCase().replace(/\s+/g, '-');
+  }
+
+  getPossiblyInfected(cattle){
+    for (let i = 0; i < cattle.length; i++){
+      let cattleDistance = Math.sqrt(((cattle[i].fieldX - this.fieldX) * (cattle[i].fieldX - this.fieldX)) + ((cattle[i].fieldY - this.fieldY) * (cattle[i].fieldY - this.fieldY)));
+      if (cattleDistance < 10){
+        if (cattle[i].#status === 'Infected'){
+          return true;
+        }
+      }
+    }
+
+    if (this.#status === 'Infected'){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   toJSON() {
